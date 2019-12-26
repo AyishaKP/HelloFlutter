@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:hello_flutter/ui/home.dart';
+import 'package:hello_flutter/dipendency/DependencyInjection.dart';
+import 'package:hello_flutter/bloc/HomeBloc.dart';
+import 'package:hello_flutter/bloc/NativeBlockProvider.dart';
 
-
-
-void main() => runApp(MyApp());
+void main() { 
+  Injector.configure(Flavor.Network);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -24,7 +28,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: BlocProvider<HomeBloc>(
+        bloc: HomeBloc(),
+        child: Home(),
+      ),
     );
   }
 }
